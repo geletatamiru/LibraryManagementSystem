@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+}
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  min-height: 500px;
+  min-width: 500px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-image: url("/assets/images/library.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.container h1 {
+  display: none;
+  font-weight: bold;
+  color: white;
+}
+.container form {
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  gap: 10px;
+  padding: 30px 10px;
+  background-color: rgba(0, 0, 0, 0.144);
+  color: black;
+  font-weight: bold;
+  color: white;
+}
+input[type='email'],input[type='text'], input[type='password']  {
+  outline: none;
+  height: 25px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  
+}
+.btn {
+  background-color: white;
+  margin: 0px auto;
+  border: none;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+
+}
+.btn:hover {
+  color: white;
+  background-color: black;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+@media (min-width: 700px){
+  .container {
+    justify-content: space-around;
+  }
+  .container h1 {
+    display: block;
+
+  }
+} 

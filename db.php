@@ -11,7 +11,7 @@ function loadEnv($path) {
     }
 }
 
-loadEnv(__DIR__ . '/../.env');
+loadEnv(__DIR__ . '/.env');
 
 $conn = new mysqli(
     $_ENV['DB_HOST'],
@@ -24,6 +24,5 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-echo "Connected successfully";
 
 ?>
