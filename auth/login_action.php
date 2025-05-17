@@ -28,7 +28,7 @@ if ($result->num_rows === 1) {
         if ($user['is_admin']) {
             header("Location: ../admin/admin_dashboard.php");
         } else {
-            header("Location: ../views/users_dashboard.php");
+            header("Location: ../index.php");
         }
         exit();
     } else {

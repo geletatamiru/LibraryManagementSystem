@@ -10,8 +10,8 @@
     .navigation {
       display: flex;
       justify-content: space-between;
-      background-color: #333;
       color: white;
+      background: rgba(128, 128, 128, 0.516);
       position: fixed;
       top: 0;
       left: 0;
@@ -65,10 +65,14 @@
     <a href="index.php" class="logo">Library</a>
     <div class="menu" id="navMenu">
       <a href="index.php">Home</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-      <a href="borrow.php">Borrow Book</a>
-      <a href="logout.php">Logout</a>
+      <a href="index.php#about">About</a>
+      <a href="index.php#">Contact</a>
+      <?php if (isset($_SESSION['user_id'])): ?>
+          <a href="users_dashboard.php">Dashboard</a>
+          <a href="auth/logout_action.php">Logout</a>
+      <?php else: ?>
+          <a href="views/login.php">Login</a>
+      <?php endif; ?>
     </div>
     <div class="hamburger" onclick="toggleMenu()">hamburger</div>
   </nav>
@@ -77,3 +81,5 @@
         document.getElementById("navMenu").classList.toggle("active");
     }
   </script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 
 <?php
-include '../db.php';
-include '../includes/header.php'; // shared nav
+include 'db.php';
+include 'header.php'; // shared nav
 
 if (!isset($_SESSION['name'])) {
     header("Location: login.php");
