@@ -64,9 +64,9 @@
   <nav class="navigation">
     <a href="index.php" class="logo">Library</a>
     <div class="menu" id="navMenu">
-      <a href="index.php">Home</a>
-      <a href="index.php#about">About</a>
-      <a href="index.php#">Contact</a>
+      <a href="/">Home</a>
+      <a href="/#about">About</a>
+      <a href="/#">Contact</a>
       <?php if (isset($_SESSION['user_id'])): ?>
           <a href="users_dashboard.php">Dashboard</a>
           <a href="auth/logout_action.php">Logout</a>

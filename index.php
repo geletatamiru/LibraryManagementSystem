@@ -18,7 +18,7 @@
           <p class="hero-subtitle">Easy borrowing, instant access, and a world of knowledge at your fingertips.</p>
           <div class="buttons">
             <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="views/users_dashboard.php" class="btn btn-secondary">Get Started</a>
+                <a href="users_dashboard.php" class="btn btn-secondary">Get Started</a>
             <?php else: ?>
                 <a href="views/login.php" class="btn btn-primary">Login</a>
                 <a href="views/register.php" class="btn btn-secondary">Register</a>
