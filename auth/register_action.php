@@ -23,7 +23,7 @@
        header(("Location: ../views/login.php?registered=1"));
        exit();
     }else {
-      echo "Error: " . $stmt->error;
+      header("Location: ../views/register.php?error=registration_error");
     }
   }
  

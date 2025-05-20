@@ -23,6 +23,15 @@
         <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
         <button type="submit" class="btn btn-primary">SignUp</button>
         <p>Already have an Account? <a href="login.php">Login</a></p>
+        <?php if (isset($_GET['error'])): ?>
+          <div style="color: red; margin-bottom: 10px;">
+              <?php
+                  if ($_GET['error'] === "registration_error") {
+                      echo "Registration error. Please try again.";
+                  } 
+              ?>
+          </div>
+        <?php endif; ?>
     </form>
 </div>
 

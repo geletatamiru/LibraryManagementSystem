@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 <?php include 'db.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,8 +67,7 @@ if (!isset($_SESSION['user_id'])) {
     <div class="sidebar">
       <h2>📚 Dashboard</h2>
       <a href="?section=all">📖 View All Books</a>
-      <a href="?section=search">🔍 Search Book</a>
-      <a href="?section=borrow">👤 Borrow Books</a>
+      <a href="?section=search">🔍 Search & Borrow Book</a>
        <a href="?section=borrowed">📦 Borrowed Books</a>
       <a href="?section=due_dates">👤 Due Dates</a>
       <a href="?section=return">👤 Return Books</a>
@@ -83,19 +83,16 @@ if (!isset($_SESSION['user_id'])) {
               include 'includes/books.php';
               break;
             case 'search':
-              include 'search_books.php';
-              break;
-            case 'borrow':
-              include 'borrow_books.php';
+              include 'includes/search_books.php';
               break;
             case 'borrowed':
-              include 'borrowed_books.php';
+              include 'includes/borrowed_books.php';
               break;
             case 'due_dates':
-              include 'due_dates.php';
+              include 'includes/due_dates.php';
               break;
             case 'return':
-              include 'return_books.php';
+              include 'includes/return_books.php';
               break;
             default:
               include 'includes/dashboard_home.php';
