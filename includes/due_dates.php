@@ -34,7 +34,7 @@ $sql = "
     SELECT b.title, b.author, br.borrow_date, br.return_date
     FROM borrowings br
     JOIN books b ON br.book_id = b.id
-    WHERE br.user_id = ?
+    WHERE br.user_id = ? AND returned = 0
     ORDER BY br.return_date ASC
 ";
 

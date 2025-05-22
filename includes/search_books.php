@@ -185,5 +185,5 @@ $user_id = $_SESSION['user_id'] ?? null;
 
     mysqli_close($conn);
     ?>
-<!-- </body>
-</html> -->
+</body>
+</html>

@@ -3,6 +3,7 @@
 
 
   if($_SERVER['REQUEST_METHOD'] =='POST'){
+    echo "hello";
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -16,15 +17,15 @@
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $name, $email, $hashedPassword);
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt,"sss",$name, $email, $hashedPassword);
 
-    if( $stmt->execute() ){
+    if( mysqli_stmt_execute($stmt) ){
        header(("Location: ../views/login.php?registered=1"));
-       exit();
     }else {
-      header("Location: ../views/register.php?error=registration_error");
+      header("Location: ../views/register.php?error=registration_error");  
     }
   }
- 
+  mysqli_close($conn);
+  exit();
 ?>

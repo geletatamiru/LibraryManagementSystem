@@ -1,19 +1,19 @@
 <?php
 session_start();
-require '../db.php';
+include '../db.php';
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 
 $sql = "SELECT * FROM users WHERE email = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $email);
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt,"s", $email);
 $stmt->execute();
 
-$result = $stmt->get_result();
+$result = mysqli_stmt_get_result( $stmt );
 
-if ($result->num_rows === 1) {
-    $user = $result->fetch_assoc();
+if (mysqli_num_rows($result) === 1) {
+    $user = mysqli_fetch_assoc($result);
 
     if (password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
@@ -33,6 +33,6 @@ if ($result->num_rows === 1) {
 } else {
     header("Location: ../views/login.php?error=user_not_found");
 }
-$conn->close();
+mysqli_close( $conn );
 exit();
 ?>
