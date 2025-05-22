@@ -101,7 +101,7 @@
 
 <!-- Footer -->
   <footer>
-    <p>&copy; 2025 My Library System. All rights reserved.</p>
+    <p style="text-align: center;">&copy; 2025 My Library System. All rights reserved.</p>
   </footer>
 
 </body>
