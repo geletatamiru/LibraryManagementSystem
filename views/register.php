@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../assets/css/register.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
   <title>Document</title>
 </head>
 <body>
   <div class="container">
-    <h1>Welcome to the Library system</h1>
+    <h1>Welcome to <span>the Library System</span></h1>
     <form action="../auth/register_action.php" method="POST">
         <h2>Register</h2>
         <label for="name">Name</label>
