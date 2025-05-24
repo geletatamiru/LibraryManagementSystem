@@ -107,14 +107,6 @@ form a:hover{
    text-decoration: underline;
    color: #1aae87;
 }
-/* @media (min-width: 700px){
-  .container {
-    justify-content: space-around;
-  }
-  .container h1 {
-    display: block;
-  }
-}  */
 @media screen and (max-width: 500px) {
   .container {
     flex-direction: column;
