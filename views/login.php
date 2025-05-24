@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../assets/css/login.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
   <title>Login Page</title>
 </head>
 <body>
   <div class="container">
-    <h1>Welcome to the Library system</h1>
+    <h1>Welcome to <span>the Library system</span></h1>
     <form action="../auth/login_action.php" method="POST">
         <h2>Login</h2>
         <label for="email">Email</label>
