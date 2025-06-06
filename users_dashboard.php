@@ -28,11 +28,13 @@ if (!isset($_SESSION['user_id'])) {
     }
 
     .sidebar {
+      margin-top: 16px;
       width: 220px;
       background-color: #34495e;
       color: white;
       min-height: 100vh;
       padding: 20px 15px;
+      position: fixed;
     }
 
     .sidebar h2 {
@@ -55,7 +57,9 @@ if (!isset($_SESSION['user_id'])) {
 
     .main-content {
       flex: 1;
+      margin-left: 220px;
       padding: 30px;
+      padding-left: 60px;
     }
   </style>
 </head>
