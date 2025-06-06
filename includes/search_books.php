@@ -130,27 +130,27 @@ $user_id = $_SESSION['user_id'] ?? null;
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_id']) && $user_id) {
         $book_id = $_POST['book_id'];
 
-        // 1. Check if the user already borrowed 2 books that are not yet returned
-        $stmt = $conn->prepare("SELECT COUNT(*) as count FROM borrowings WHERE user_id = ? AND returned = 0");
+        // Check if the user already has 2 or more active or pending borrowings
+        $stmt = $conn->prepare("SELECT COUNT(*) as count FROM borrowings WHERE user_id = ? AND status IN ('pending', 'approved', 'return_requested')");
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
         $res = $stmt->get_result()->fetch_assoc();
 
         if ($res['count'] >= 2) {
-            echo "<p class='error-message'>❌ You can only borrow up to 2 books at a time.</p>";
+            echo "<p class='error-message'>❌ You can only have up to 2 active or pending borrow requests.</p>";
             exit;
         }
-
-        // 2. Check if the user already borrowed this book and hasn't returned it
-        $stmt = $conn->prepare("SELECT * FROM borrowings WHERE user_id = ? AND book_id = ? AND returned = 0");
+       // 2. Check if the user already borrowed this book and hasn't returned it
+        $stmt = $conn->prepare("SELECT * FROM borrowings WHERE user_id = ? AND book_id = ? AND status IN ('pending', 'approved', 'return_requested')");
         $stmt->bind_param("ii", $user_id, $book_id);
         $stmt->execute();
         $check_duplicate = $stmt->get_result();
 
         if ($check_duplicate->num_rows > 0) {
-            echo "<p class='error-message'>❌ You already borrowed this book and haven’t returned it.</p>";
+            echo "<p class='error-message'>❌ You already borrowed or requested the book and haven’t returned it.</p>";
             exit;
         }
+
 
         // 3. Check book availability
         $check = $conn->prepare("SELECT available_copies FROM books WHERE id = ?");
@@ -160,26 +160,22 @@ $user_id = $_SESSION['user_id'] ?? null;
 
         if ($result && $row = $result->fetch_assoc()) {
             if ($row['available_copies'] > 0) {
-                // 4. Insert borrowing record with borrow_date and return_date (15 days later)
+                // 4. Insert borrowing record with status = 'pending'
                 $insert = $conn->prepare("
-                    INSERT INTO borrowings (user_id, book_id, borrow_date, return_date) 
-                    VALUES (?, ?, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY))
+                    INSERT INTO borrowings (user_id, book_id, status)
+                    VALUES (?, ?, 'pending')
                 ");
                 $insert->bind_param("ii", $user_id, $book_id);
                 $insert->execute();
 
-                // 5. Decrease available copies
-                $update = $conn->prepare("UPDATE books SET available_copies = available_copies - 1 WHERE id = ?");
-                $update->bind_param("i", $book_id);
-                $update->execute();
-
-                echo "<p class='success-message'>✅ Book borrowed successfully! Due in 15 days.</p>";
+                echo "<p class='success-message'>✅ Borrow request sent! Waiting for admin approval.</p>";
             } else {
                 echo "<p class='error-message'>❌ Book is not available.</p>";
             }
         } else {
             echo "<p class='error-message'>❌ Book not found.</p>";
         }
+
     }
 
 
