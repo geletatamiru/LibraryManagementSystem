@@ -22,9 +22,9 @@
           <div style="color: red; margin-bottom: 10px;">
               <?php
                   if ($_GET['error'] === "invalid_password") {
-                      echo "Incorrect password. Please try again.";
+                      echo "Invalid Credentials. Please try again.";
                   } elseif ($_GET['error'] === "user_not_found") {
-                      echo "No user found with that email.";
+                      echo "Invalid Credentials. Please try again.";
                   }
               ?>
           </div>
