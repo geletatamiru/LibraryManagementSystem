@@ -28,18 +28,45 @@ if (!isset($_SESSION['user_id'])) {
     }
 
     .sidebar {
+      margin-top: 16px;
       width: 220px;
       background-color: #34495e;
       color: white;
       min-height: 100vh;
       padding: 20px 15px;
+      position: fixed;
     }
 
     .sidebar h2 {
       font-size: 18px;
       margin-bottom: 20px;
     }
+    .open-sidebar {
+      position: fixed;
+      top: 220px;
+      left: 0px;
+      cursor: pointer;
+      z-index: 10;
+      background-color:rgb(173, 169, 169,0.3);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      display: none;
+      border: 0;
 
+    }
+    .open-sidebar img {
+      width: 30px;
+      height: 30px;
+      transition: transform 0.3s ease;
+    }
+    .open-sidebar:hover img {
+      transform: rotate(360deg);
+    }
     .sidebar a {
       display: block;
       color: white;
@@ -55,7 +82,24 @@ if (!isset($_SESSION['user_id'])) {
 
     .main-content {
       flex: 1;
+      margin-left: 220px;
       padding: 30px;
+      padding-left: 60px;
+    }
+    @media screen and (max-width:500px){
+          .open-sidebar {
+              display: flex;
+          }
+         .sidebar{
+            display:none;
+         }
+         .main-content{
+            margin-left:0;
+            padding-left: 40px;
+         }
+         .opened-sidebar.sidebar{
+            display: block;
+         }
     }
   </style>
 </head>
@@ -64,6 +108,9 @@ if (!isset($_SESSION['user_id'])) {
   <div class="dashboard-container">
 
     <!-- Sidebar -->
+    <button class="open-sidebar">
+       <img src="./assets/images/right-arrow.png" alt="right-arrow">
+    </button>
     <div class="sidebar">
       <h2>📚 Dashboard</h2>
       <a href="?section=all">📖 View All Books</a>
@@ -100,6 +147,17 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
   </div>
-
+ <script>
+    const openSidebar = document.querySelector('.open-sidebar');
+    const sidebar = document.querySelector('.sidebar');
+    openSidebar.onclick = function() {
+      sidebar.classList.toggle('opened-sidebar');
+      if (sidebar.classList.contains('opened-sidebar')) {
+        openSidebar.querySelector('img').src = './assets/images/left-arrow.png';
+      } else {
+        openSidebar.querySelector('img').src = './assets/images/right-arrow.png';
+      }
+    };
+ </script>
 </body>
 </html>
