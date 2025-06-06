@@ -151,7 +151,6 @@ if (!isset($_SESSION['user_id'])) {
     const openSidebar = document.querySelector('.open-sidebar');
     const sidebar = document.querySelector('.sidebar');
     openSidebar.onclick = function() {
-      console.log('sidebar clicked');
       sidebar.classList.toggle('opened-sidebar');
       if (sidebar.classList.contains('opened-sidebar')) {
         openSidebar.querySelector('img').src = './assets/images/left-arrow.png';
