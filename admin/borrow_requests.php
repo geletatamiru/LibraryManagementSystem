@@ -14,7 +14,11 @@ $result = $conn->query($sql);
 ?>
 <div class="borrow-container">
   <h1>📥 Borrow Requests</h1>
-
+  <?php 
+    if (isset($_GET['status']) && $_GET['status'] === 'approved') {
+      echo "<p style='color: green;'>Borrow request approved!</p>";
+    }
+  ?>
   <?php if ($result->num_rows > 0): ?>
       <table class="admin-table">
           <thead>
@@ -47,6 +51,8 @@ $result = $conn->query($sql);
 </div>
 
 <?php
+$statusMessage = "";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_id'], $_POST['action'])) {
     $id = intval($_POST['request_id']);
     $action = $_POST['action'];
@@ -83,8 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_id'], $_POST[
                 $decrease->execute();
 
                 $message = "📘 Your borrow request ( $title) has been approved!";
+                $statusMessage = "approved";
             } else {
                 $message = "❌ Your borrow request ($title) has been rejected. Book is not available.";
+                $statusMessage = "❌ Request ID $id could not be approved. Book is unavailable.";
             }
 
         } elseif ($action === 'reject') {
@@ -93,6 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_id'], $_POST[
             $update->execute();
 
             $message = "❌ Your borrow request ($title) has been rejected.";
+            $statusMessage = "rejected";
+
         }
 
         // Send notification
@@ -100,8 +110,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_id'], $_POST[
         $notify->bind_param("is", $user_id, $message);
         $notify->execute();
         $notify->close();
+        $stmt->close();
+        header("Location: borrow_requests.php?status=$statusMessage");
+        exit();
     }
 
-    $stmt->close();
 }
 ?>
