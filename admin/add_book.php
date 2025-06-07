@@ -4,7 +4,6 @@ include_once 'header.php';
 $error = "";
 $success = "";
 
-// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = trim($_POST['title']);
     $author = trim($_POST['author']);
@@ -12,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $total_copies_input = trim($_POST['total_copies']);
     $image_url = trim($_POST['image_url']);
 
-    // Basic validation
     if (!is_numeric($total_copies_input) || (int) $total_copies_input < 1) {
         $error = "Total copies must be a positive number.";
     } elseif (empty($title) || empty($author) || empty($category_id)) {
@@ -20,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $total_copies = (int) $total_copies_input;
 
-        // Escape inputs for SQL
         $title_esc = mysqli_real_escape_string($conn, $title);
         $author_esc = mysqli_real_escape_string($conn, $author);
         $image_url_esc = mysqli_real_escape_string($conn, $image_url);
