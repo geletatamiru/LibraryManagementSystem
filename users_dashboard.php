@@ -13,6 +13,18 @@ $count_sql->execute();
 $count_result = $count_sql->get_result();
 $unread_count = $count_result->fetch_assoc()['unread_count'];
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'], $_POST['notification_id'])) {
+  $notification_id = $_POST['notification_id'];
+  echo "Notification ID: " . htmlspecialchars($notification_id);
+  $stmt = $conn->prepare("DELETE FROM notifications WHERE id = ? AND user_id = ?");
+  $stmt->bind_param("ii", $notification_id, $_SESSION['user_id']);
+  $stmt->execute();
+  $stmt->close();
+
+  header("Location: users_dashboard.php?section=notifications");
+  exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,6 +106,9 @@ $unread_count = $count_result->fetch_assoc()['unread_count'];
     }
     /* notifications */
     .notification {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 12px;
       margin-bottom: 10px;
       border-radius: 6px;
@@ -111,7 +126,19 @@ $unread_count = $count_result->fetch_assoc()['unread_count'];
         border-left-color: #ccc;
         font-weight: normal;
     }
-
+   .notification button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .notification button:hover{
+      transform: scale(1.1);
+      transition: transform 0.3s ease;
+    }
+    .notification button img {
+        width: 30px;
+        height: 30px;
+    }
     @media screen and (max-width:500px){
           .open-sidebar {
               display: flex;
