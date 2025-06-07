@@ -1,0 +1,31 @@
+<?php
+$user_id = $_SESSION['user_id']; // Ensure the session is active
+
+
+// 1. Fetch all notifications including their read status
+$sql = "SELECT message, created_at, is_read FROM notifications WHERE user_id = ? ORDER BY created_at DESC";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// 2. Mark all unread notifications as read when this page is visited
+$markRead = $conn->prepare("UPDATE notifications SET is_read = 1 WHERE user_id = ? AND is_read = 0");
+$markRead->bind_param("i", $user_id);
+$markRead->execute();
+$markRead->close();
+
+?>
+
+<h2>🔔 Notifications</h2>
+
+<?php if ($result->num_rows > 0): ?>
+    <?php while ($row = $result->fetch_assoc()): ?>
+        <div class="notification <?= $row['is_read'] ? 'read' : 'unread' ?>">
+            <p><?= htmlspecialchars($row['message']) ?></p>
+            <small><?= date("F j, Y, g:i A", strtotime($row['created_at'])) ?></small>
+        </div>
+    <?php endwhile; ?>
+<?php else: ?>
+    <p>No notifications yet.</p>
+<?php endif; ?>

@@ -115,3 +115,23 @@ h1 {
     color: red;
     text-decoration: none;
 }
+/* Borrow request */
+.borrow-container {
+  padding: 60px;
+}
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-table th, .admin-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.admin-table th {
+    background-color: #f4f4f4;
+    text-align: left;
+}
+
