@@ -20,9 +20,9 @@ include_once '../db.php';
 <body>
   <nav class="navigation">
     <a href="admin_dashboard.php">🏠 Dashboard</a>
-    <a href="borrow_requests.php">📥 Borrow Requests</a>
-    <a href="return_requests.php">📘 Return Requests</a>
     <div class="menu" id="navMenu">
+      <a href="borrow_requests.php">📥 Borrow Requests</a>
+      <a href="return_requests.php">📘 Return Requests</a>
       <a href="manage_books.php">📚 Books</a>
       <a href="manage_users.php">👥 Users</a>
       <a href="logout.php" class="logout-link">🔒 Logout</a>
