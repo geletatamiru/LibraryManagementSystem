@@ -1,9 +1,9 @@
 <?php
-session_start();           
-session_unset();           
-session_destroy();        
+session_start();
 
+unset($_SESSION['user_id']);
+unset($_SESSION['name']);
 
-header("Location: ../views/login.php"); 
+header("Location: ../views/login.php");
 exit();
 ?>
