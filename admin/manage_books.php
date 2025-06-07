@@ -114,7 +114,7 @@ include_once 'header.php';
     $sql = "select books.id,title,author,name,available_copies,total_copies,image_url from books join categories on books.category_id = categories.id ORDER BY RAND() LIMIT 20";
     $result = mysqli_query($conn, $sql);
 
-    echo "<div class='addbookBtn-container'><h3>Total Books</h3>" . "<a href='add_book.php' class='addbtn'>Add New Book</a></div>";
+    echo "<div class='addbookBtn-container'><h3>Total Books</h3>" . "<a href='add_book.php' class='addbtn'>Add Book</a></div>";
     echo "<div class='book-list'>";
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
