@@ -49,8 +49,12 @@ include_once 'header.php';
             color: red;
             font-weight: bold;
         }
-
-        .addbtn {
+        .editBtns {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        .addbtn,.incrementBtn {
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
@@ -58,8 +62,7 @@ include_once 'header.php';
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
-
-        .addbtn:hover {
+        .addbtn:hover,.incrementBtn:hover {
             background-color: #0056b3;
         }
 
@@ -105,13 +108,29 @@ include_once 'header.php';
         .btn-secondary {
             background-color: gray;
         }
+        .editBtns .btn-secondary,.editBtns .btn-secondary {
+            padding: 5px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            font-weight: bold;
+            font-size: 1.5rem;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     </style>
 </head>
 
 <body>
     <?php
 
-    $sql = "select books.id,title,author,name,available_copies,total_copies,image_url from books join categories on books.category_id = categories.id ORDER BY RAND() LIMIT 20";
+    $sql = "select books.id,title,author,name,available_copies,total_copies,image_url from books join categories on books.category_id = categories.id ORDER BY books.title LIMIT 20";
     $result = mysqli_query($conn, $sql);
 
     echo "<div class='addbookBtn-container'><h3>Total Books</h3>" . "<a href='add_book.php' class='addbtn'>Add Book</a></div>";
@@ -126,7 +145,12 @@ include_once 'header.php';
             echo "<p>Category: " . $row['name'] . "</p>";
             echo "<p>Available Copies: " . htmlspecialchars($row['available_copies']) . "</p>";
             echo "<p>Total Copies: " . htmlspecialchars($row['total_copies']) . "</p>";
-            echo $deleteBtn;
+            echo "<div class='btn-container'>{$deleteBtn}<form method=\"POST\" action=\"modify_book_copies.php\" class='editBtns'>
+                        <input type=\"hidden\" name=\"book_id\" value=\"{$row['id']}\"/>
+                        <button type=\"submit\" class=\"btn btn-secondary\" name='action' value='increment'>+</button>
+                        <p>Copies</p>
+                        <button type=\"submit\" class=\"btn btn-secondary\" name='action' value='decrement'>-</button>
+                    </form></div>";
             echo "</div>";
         }
     }
