@@ -102,7 +102,6 @@
     <div class="menu" id="navMenu">
       <a href="/">Home</a>
       <a href="/#about">About</a>
-      <a href="/#">Contact</a>
       <?php if (isset($_SESSION['user_id'])): ?>
           <a href="users_dashboard.php">Dashboard</a>
           <a href="auth/logout_action.php">Logout</a>
