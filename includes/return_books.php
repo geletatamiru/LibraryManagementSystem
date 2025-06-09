@@ -91,8 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['borrowing_id'])) {
 
     mysqli_stmt_close($stmt);
 }
-mysqli_close($conn);
-
+    mysqli_close($conn);
 ?>
 
 </body>

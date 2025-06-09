@@ -170,6 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'], $_POST['not
       <a href="?section=search">🔍 Search & Borrow Book</a>
       <a href="?section=due_dates">👤 Due Dates</a>
       <a href="?section=return">📦 Return Books</a>
+      <a href="?section=pending">📦 My Pending Requests</a>
       <a href="?section=notifications">🔔 Notifications<?= $unread_count > 0 ? " ($unread_count)" : "" ?></a>
     </div>
 
@@ -190,6 +191,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'], $_POST['not
               break;
             case 'return':
               include 'includes/return_books.php';
+              break;
+            case 'pending':
+              include 'includes/pending_requests.php';
               break;
             case 'notifications':
               include 'includes/notifications.php';
