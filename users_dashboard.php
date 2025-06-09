@@ -32,135 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'], $_POST['not
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Dashboard</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-    }
-
-    .dashboard-container {
-      display: flex;
-      width: 100%;
-      padding-top: 58px;
-    }
-
-    .sidebar {
-      margin-top: 16px;
-      width: 220px;
-      background-color: #34495e;
-      color: white;
-      min-height: 100vh;
-      padding: 20px 15px;
-      position: fixed;
-    }
-
-    .sidebar h2 {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-    .open-sidebar {
-      position: fixed;
-      top: 220px;
-      left: 0px;
-      cursor: pointer;
-      z-index: 10;
-      background-color:rgb(173, 169, 169,0.3);
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      display: none;
-      border: 0;
-
-    }
-    .open-sidebar img {
-      width: 30px;
-      height: 30px;
-      transition: transform 0.3s ease;
-    }
-    .open-sidebar:hover img {
-      transform: rotate(360deg);
-    }
-    .sidebar a {
-      display: block;
-      color: white;
-      text-decoration: none;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 4px;
-    }
-
-    .sidebar a:hover {
-      background-color: #2c3e50;
-    }
-
-    .main-content {
-      flex: 1;
-      margin-left: 220px;
-      padding: 30px;
-      padding-left: 60px;
-    }
-    /* notifications */
-    .notification {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      border-left: 5px solid;
-    }
-
-    .notification.unread {
-        background-color: #e6f4ff;
-        border-left-color: #007bff;
-        font-weight: bold;
-    }
-
-    .notification.read {
-        background-color: #f5f5f5;
-        border-left-color: #ccc;
-        font-weight: normal;
-    }
-   .notification button {
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
-    .notification button:hover{
-      transform: scale(1.1);
-      transition: transform 0.3s ease;
-    }
-    .notification button img {
-        width: 30px;
-        height: 30px;
-    }
-    @media screen and (max-width:500px){
-          .open-sidebar {
-              display: flex;
-          }
-         .sidebar{
-            display:none;
-         }
-         .main-content{
-            margin-left:0;
-            padding-left: 40px;
-         }
-         .opened-sidebar.sidebar{
-            display: block;
-         }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/userDashboard.css">
 </head>
 <body>
 
   <div class="dashboard-container">
 
-    <!-- Sidebar -->
     <button class="open-sidebar">
        <img src="./assets/images/right-arrow.png" alt="right-arrow">
     </button>
@@ -174,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'], $_POST['not
       <a href="?section=notifications">🔔 Notifications<?= $unread_count > 0 ? " ($unread_count)" : "" ?></a>
     </div>
 
-    <!-- Main content -->
     <div class="main-content">
       <?php
         if (isset($_GET['section'])) {

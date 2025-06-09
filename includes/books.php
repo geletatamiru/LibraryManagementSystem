@@ -2,38 +2,6 @@
 <html>
 <head>
     <title>Library Managment | Explore Books</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .book-list{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .book-card {
-            border: 1px solid #ccc;
-            padding: 15px;
-            margin-bottom: 10px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .book-card img{
-            height: 250px;
-            object-fit: cover;
-            max-width: 100%;
-            border-radius: 8px;
-        }
-        h2 {
-            margin-bottom: 20px;
-        }
-        .overdue {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
 <?php

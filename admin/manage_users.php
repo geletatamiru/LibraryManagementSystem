@@ -6,7 +6,19 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-$users = $conn->query("SELECT id, name, email FROM users ORDER BY id ASC");
+$query = "
+    SELECT 
+        users.id,
+        users.name,
+        users.email,
+        COUNT(borrowings.id) AS total_borrowings,
+        SUM(CASE WHEN borrowings.status = 'approved' THEN 1 ELSE 0 END) AS active_borrowings
+    FROM users
+    LEFT JOIN borrowings ON users.id = borrowings.user_id
+    GROUP BY users.id, users.name, users.email
+    ORDER BY users.id ASC
+";
+$users = $conn->query($query);
 ?>
 <div class="user-container">
   <h2 style="text-align:center;">👥 Manage Users</h2>
@@ -16,6 +28,8 @@ $users = $conn->query("SELECT id, name, email FROM users ORDER BY id ASC");
               <th>#</th>
               <th>Full Name</th>
               <th>Email</th>
+              <th>Total Borrowings</th>
+              <th>Active Borrowings</th>
           </tr>
       </thead>
       <tbody>
@@ -25,6 +39,8 @@ $users = $conn->query("SELECT id, name, email FROM users ORDER BY id ASC");
                       <td><?= htmlspecialchars($user['id']) ?></td>
                       <td><?= htmlspecialchars($user['name']) ?></td>
                       <td><?= htmlspecialchars($user['email']) ?></td>
+                      <td><?= htmlspecialchars($user['total_borrowings']) ?></td>
+                      <td><?= htmlspecialchars($user['active_borrowings']) ?></td>
                   </tr>
               <?php endwhile; ?>
           <?php else: ?>

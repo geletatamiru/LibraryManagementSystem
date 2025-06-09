@@ -5,64 +5,7 @@ $user_id = $_SESSION['user_id'] ?? null;
 <html>
 <head>
     <title>Book Search</title>
-    <style>
-        .book-card {
-            padding: 15px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .book-card h4 {
-            margin-top: 0;
-            color: #007bff;
-        }
-        .book-card p {
-            margin-bottom: 5px;
-        }
-        form {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 20px;
-            max-width: 500px;
-        }
-        form input[type="text"] {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        form button[type="submit"] {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        form button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-        h2 {
-            margin-bottom: 15px;
-        }
-        .error-message {
-            color: red;
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #ffebee;
-            border: 1px solid #f44336;
-            border-radius: 5px;
-        }
-        .no-results {
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/search.css">
 </head>
 <body>
     <form method='GET' action='' style='display: flex; gap: 10px; align-items: center; margin-bottom: 20px; max-width: 500px;'>
@@ -98,7 +41,7 @@ $user_id = $_SESSION['user_id'] ?? null;
 
               if (mysqli_num_rows($result) > 0) {
                   while ($row = mysqli_fetch_assoc($result)) {
-                      echo "<div class='book-card'>";
+                      echo "<div class='search-card'>";
                       echo "<h4>" . htmlspecialchars($row['title']) . "</h4>";
                       echo "<p>Author: " . htmlspecialchars($row['author']) . "</p>";
                       echo "<p>Available Copies: " . $row['available_copies'] . "</p>";
