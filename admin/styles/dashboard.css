@@ -115,7 +115,6 @@ h1 {
     color: red;
     text-decoration: none;
 }
-/* Borrow request */
 .borrow-container {
   padding: 60px;
 }
@@ -135,11 +134,9 @@ h1 {
     text-align: left;
 }
 
-/* return-request */
 .return-container {
   padding-top: 60px;
 }
-/* manage-users */
 .user-container {
   padding-top: 60px;
 }
@@ -155,7 +152,6 @@ h1 {
 .user-table a.btn-delete { 
   color: red; text-decoration: none; 
 }
-/* Overdue books */
 .overdue-cont {
   padding-top: 60px;
 }
@@ -175,20 +171,17 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Card title */
 .overdue-card h4 {
     margin: 0 0 10px;
     font-size: 18px;
     color: #333;
 }
 
-/* Text inside card */
 .overdue-card p {
     margin: 5px 0;
     color: #444;
 }
 
-/* Overdue text highlighted */
 .overdue-text {
     color: #e60000;
     font-weight: bold;
@@ -210,7 +203,6 @@ h1 {
     background-color: #cc0000;
 }
 
-/* Message text (like reminder sent) */
 .no-overdue,
 .reminder-message {
     text-align: center;

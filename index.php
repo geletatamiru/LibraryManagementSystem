@@ -11,7 +11,6 @@
 </head>
 <body>
 <main class="container">
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
           <h1>📚 Discover Your Next Great Read</h1>
@@ -28,8 +27,7 @@
         </div>
       </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
+      <section class="about" id="about">
       <div class="about-container">
         <div class="about-image">
           <img src="assets/images/lib3.jpg" alt="Library Image" />
@@ -47,8 +45,6 @@
       </div>
     </section>
 
-
-    <!-- Features -->
     <section class="features">
       <h2>Why Choose Our Library System?</h2>
       <div class="feature-cards">
@@ -75,8 +71,6 @@
       </div>
     </section>
 
-
-    <!-- Categories -->
     <section class="categories">
       <h2>Explore Book Categories</h2>
       <div class="category-cards">
@@ -99,7 +93,6 @@
       </div>
     </section>
 
-<!-- Footer -->
   <footer>
     <p style="text-align: center;">&copy; 2025 My Library System. All rights reserved.</p>
   </footer>
