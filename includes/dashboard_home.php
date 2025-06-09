@@ -39,77 +39,19 @@ if ($result_due && $row = mysqli_fetch_assoc($result_due)) {
     }
 }
 ?>
-
-<head>
-  
-<style>
-  .welcome-heading {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 28px;
-    color: #2c3e50;
-  }
-
-  .subheading {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #7f8c8d;
-  }
-
-  .dashboard-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin: 0 auto;
-    max-width: 900px;
-    padding: 0 20px;
-  }
-
-  .card {
-    flex: 1 1 250px;
-    background-color: #f8f9fa;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 25px;
-    text-align: center;
-    transition: transform 0.2s;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-  }
-
-  .card h3 {
-    color: #34495e;
-    margin-bottom: 10px;
-  }
-
-  .card p {
-    font-size: 18px;
-    color: #2c3e50;
-  }
-
-  .card p:has(span.overdue-warning) {
-    color: #e74c3c;
-    font-weight: bold;
-  }
-</style>
-
-</head>
 <h2 class="welcome-heading">Welcome, <?php echo htmlspecialchars($user_name); ?>!</h2>
 <p class="subheading">Here’s a quick overview of your account:</p>
 
 <div class="dashboard-cards">
-  <div class="card">
+  <div class="dashboard-card">
     <h3>Total Books</h3>
     <p><?php echo $total_books; ?></p>
   </div>
-  <div class="card">
+  <div class="dashboard-card">
     <h3>Books You Borrowed</h3>
     <p><?php echo $borrowed_books; ?></p>
   </div>
-  <div class="card">
+  <div class="dashboard-card">
     <h3>Due Status</h3>
     <p><?php echo $due_message; ?></p>
   </div>

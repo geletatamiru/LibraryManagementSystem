@@ -9,7 +9,7 @@ $user_id = $_SESSION['user_id'];
         body {
             font-family: Arial, sans-serif;
         }
-        .book-card {
+        .return-card{
             border: 1px solid #ccc;
             border-radius: 6px;
             padding: 15px;
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "<div class='book-card'>";
+            echo "<div class='return-card'>";
             echo "<h4>" . htmlspecialchars($row['title']) . "</h4>";
             echo "<p>Author: " . htmlspecialchars($row['author']) . "</p>";
             echo "<p>Borrowed on: " . date('F j, Y', strtotime($row['borrow_date'])) . "</p>";
