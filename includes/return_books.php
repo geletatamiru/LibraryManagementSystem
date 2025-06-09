@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             echo "<p>Borrowed on: " . date('F j, Y', strtotime($row['borrow_date'])) . "</p>";
             echo "<form method='POST' action=''>";
             echo "<input type='hidden' name='borrowing_id' value='" . $row['id'] . "' />";
-            echo "<button type='submit'>📘 Request Return</button>"; // changed label
+            echo "<button type='submit'>📘 Request Return</button>"; 
             echo "</form>";
             echo "</div>";
         }
@@ -69,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['borrowing_id'])) {
     $borrowing_id = $_POST['borrowing_id'];
 
-    // 1. Check if the borrowing exists, belongs to the user, and is in 'approved' status
     $stmt = mysqli_prepare($conn, "SELECT book_id FROM borrowings WHERE id = ? AND user_id = ? AND status = 'approved'");
     mysqli_stmt_bind_param($stmt, "ii", $borrowing_id, $user_id);
     mysqli_stmt_execute($stmt);
@@ -78,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['borrowing_id'])) {
     if ($result && $row = mysqli_fetch_assoc($result)) {
         $book_id = $row['book_id'];
 
-        // 2. Update the borrowing status to 'return_requested'
         $updateBorrowing = mysqli_prepare($conn, "UPDATE borrowings SET status = 'return_requested' WHERE id = ?");
         mysqli_stmt_bind_param($updateBorrowing, "i", $borrowing_id);
         mysqli_stmt_execute($updateBorrowing);

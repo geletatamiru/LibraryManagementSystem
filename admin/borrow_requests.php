@@ -1,7 +1,6 @@
 <?php
 include_once 'header.php';
 
-// Fetch all pending borrow requests
 $sql = "
     SELECT br.id, u.name, b.title
     FROM borrowings br
@@ -57,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_id'], $_POST[
     $id = intval($_POST['request_id']);
     $action = $_POST['action'];
 
-    // Fetch user_id and book_id in one query
     $stmt = $conn->prepare("SELECT user_id, book_id FROM borrowings WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -76,14 +74,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_id'], $_POST[
          $title = $res['title'];
 
         if ($action === 'approve') {
-            // Check book availability
             if ($available > 0) {
-                // Approve request & update borrow + due date
                 $update = $conn->prepare("UPDATE borrowings SET status = 'approved', borrow_date = NOW(), due_date = DATE_ADD(NOW(), INTERVAL 15 DAY) WHERE id = ?");
                 $update->bind_param("i", $id);
                 $update->execute();
 
-                // Decrease available copies
                 $decrease = $conn->prepare("UPDATE books SET available_copies = available_copies - 1 WHERE id = ?");
                 $decrease->bind_param("i", $book_id);
                 $decrease->execute();
@@ -105,7 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_id'], $_POST[
 
         }
 
-        // Send notification
         $notify = $conn->prepare("INSERT INTO notifications (user_id, message) VALUES (?, ?)");
         $notify->bind_param("is", $user_id, $message);
         $notify->execute();

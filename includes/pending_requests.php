@@ -1,7 +1,6 @@
 <?php
 $user_id = $_SESSION['user_id'];
 
-// Get pending borrow requests
 $borrow_stmt = $conn->prepare("
     SELECT b.id, bk.title, bk.author, bk.image_url 
     FROM borrowings b
@@ -12,7 +11,6 @@ $borrow_stmt->bind_param("i", $user_id);
 $borrow_stmt->execute();
 $pending_borrows = $borrow_stmt->get_result();
 
-// Get pending return requests
 $return_stmt = $conn->prepare("
     SELECT b.id, bk.title, bk.image_url, b.borrow_date, b.due_date
     FROM borrowings b

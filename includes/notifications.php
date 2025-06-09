@@ -1,15 +1,13 @@
 <?php
-$user_id = $_SESSION['user_id']; // Ensure the session is active
+$user_id = $_SESSION['user_id']; 
 
 
-// 1. Fetch all notifications including their read status
 $sql = "SELECT id,message, created_at, is_read FROM notifications WHERE user_id = ? ORDER BY created_at DESC";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// 2. Mark all unread notifications as read when this page is visited
 $markRead = $conn->prepare("UPDATE notifications SET is_read = 1 WHERE user_id = ? AND is_read = 0");
 $markRead->bind_param("i", $user_id);
 $markRead->execute();

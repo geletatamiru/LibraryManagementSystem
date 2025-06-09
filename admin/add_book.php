@@ -22,12 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $author_esc = mysqli_real_escape_string($conn, $author);
         $image_url_esc = mysqli_real_escape_string($conn, $image_url);
 
-        // Check if book with same title exists
         $check_sql = "SELECT id, total_copies, available_copies FROM books WHERE title = '$title_esc' LIMIT 1";
         $check_result = mysqli_query($conn, $check_sql);
 
         if ($check_result && mysqli_num_rows($check_result) > 0) {
-            // Book exists, increment copies
             $book = mysqli_fetch_assoc($check_result);
             $new_total = $book['total_copies'] + $total_copies;
             $new_available = $book['available_copies'] + $total_copies;
@@ -40,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $error = "Error updating book copies: " . mysqli_error($conn);
             }
         } else {
-            // Insert new book
             $insert_sql = "INSERT INTO books (title, author, category_id, available_copies, total_copies, image_url)
                            VALUES ('$title_esc', '$author_esc', $category_id, $total_copies, $total_copies, '$image_url_esc')";
 

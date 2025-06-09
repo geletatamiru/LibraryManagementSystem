@@ -6,7 +6,6 @@ $user_id = $_SESSION['user_id'] ?? null;
 <head>
     <title>Book Search</title>
     <style>
-        /* Basic styles (consider moving to a separate CSS file for larger projects) */
         .book-card {
             padding: 15px;
             border: 1px solid #ddd;
@@ -26,7 +25,7 @@ $user_id = $_SESSION['user_id'] ?? null;
             gap: 10px;
             align-items: center;
             margin-bottom: 20px;
-            max-width: 500px; /* Added max-width for better layout */
+            max-width: 500px;
         }
         form input[type="text"] {
             flex: 1;
@@ -43,7 +42,7 @@ $user_id = $_SESSION['user_id'] ?? null;
             cursor: pointer;
         }
         form button[type="submit"]:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+            background-color: #0056b3;
         }
         h2 {
             margin-bottom: 15px;
@@ -104,7 +103,6 @@ $user_id = $_SESSION['user_id'] ?? null;
                       echo "<p>Author: " . htmlspecialchars($row['author']) . "</p>";
                       echo "<p>Available Copies: " . $row['available_copies'] . "</p>";
                       if ($row['available_copies'] > 0 && $user_id) {
-                            // ✅ Show Borrow Form
                             echo "<form method='POST' action=''>";
                             echo "<input type='hidden' name='book_id' value='" . $row['id'] . "' />";
                             echo "<button type='submit'>📘 Borrow</button>";
@@ -130,7 +128,6 @@ $user_id = $_SESSION['user_id'] ?? null;
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_id']) && $user_id) {
         $book_id = $_POST['book_id'];
 
-        // Check if the user already has 2 or more active or pending borrowings
         $stmt = $conn->prepare("SELECT COUNT(*) as count FROM borrowings WHERE user_id = ? AND status IN ('pending', 'approved', 'return_requested')");
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
@@ -140,7 +137,6 @@ $user_id = $_SESSION['user_id'] ?? null;
             echo "<p class='error-message'>❌ You can only have up to 2 active or pending borrow requests.</p>";
             exit;
         }
-       // 2. Check if the user already borrowed this book and hasn't returned it
         $stmt = $conn->prepare("SELECT * FROM borrowings WHERE user_id = ? AND book_id = ? AND status IN ('pending', 'approved', 'return_requested')");
         $stmt->bind_param("ii", $user_id, $book_id);
         $stmt->execute();
@@ -152,7 +148,6 @@ $user_id = $_SESSION['user_id'] ?? null;
         }
 
 
-        // 3. Check book availability
         $check = $conn->prepare("SELECT available_copies FROM books WHERE id = ?");
         $check->bind_param("i", $book_id);
         $check->execute();
@@ -160,7 +155,6 @@ $user_id = $_SESSION['user_id'] ?? null;
 
         if ($result && $row = $result->fetch_assoc()) {
             if ($row['available_copies'] > 0) {
-                // 4. Insert borrowing record with status = 'pending'
                 $insert = $conn->prepare("
                     INSERT INTO borrowings (user_id, book_id, status)
                     VALUES (?, ?, 'pending')
