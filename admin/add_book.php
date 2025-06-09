@@ -52,73 +52,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Add New Book</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 40px;
-        }
-
-        form {
-            max-width: 500px;
-            margin: auto;
-            background-color: #f5f5f5;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-
-        input,
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .btn {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-
-        .message {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .message.success {
-            color: green;
-        }
-
-        .message.error {
-            color: red;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles/addBook.css">
 </head>
-
 <body>
 
     <h2>Add a New Book</h2>

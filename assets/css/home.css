@@ -119,7 +119,6 @@ body {
   margin-bottom: 15px;
 }
 
-/* Responsive for smaller screens */
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2.5rem;
@@ -139,7 +138,6 @@ body {
 
 }
 
-/* features section */
 .features {
   background: #f0f8ff;
   padding: 80px 50px;
