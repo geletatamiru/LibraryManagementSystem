@@ -1,7 +1,6 @@
 <?php 
   include '../db.php';
 
-
   if($_SERVER['REQUEST_METHOD'] =='POST'){
     echo "hello";
     $name = $_POST['name'];

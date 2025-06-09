@@ -25,6 +25,7 @@ include_once '../db.php';
       <a href="return_requests.php">📘 Return Requests</a>
       <a href="manage_books.php">📚 Books</a>
       <a href="manage_users.php">👥 Users</a>
+      <a href="overdue.php">Overdue Books</a>
       <a href="logout.php" class="logout-link">🔒 Logout</a>
     </div>
     <div class="hamburger-menu" onclick="toggleMenu()"> 
