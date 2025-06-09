@@ -17,6 +17,7 @@
       top: 0;
       left: 0;
       width: 100%;
+      z-index: 99;
       box-sizing: border-box;
       font-weight: bold;
       padding: 20px 10px;
@@ -101,7 +102,7 @@
     <a href="index.php" class="logo">Library</a>
     <div class="menu" id="navMenu">
       <a href="/">Home</a>
-      <a href="/#about">About</a>
+      <a href="/#about" id="aboutLink">About</a>
       <?php if (isset($_SESSION['user_id'])): ?>
           <a href="users_dashboard.php">Dashboard</a>
           <a href="auth/logout_action.php">Logout</a>
@@ -118,6 +119,12 @@
         document.getElementById("navMenu").classList.toggle("active");
         document.querySelector(".burger").classList.toggle("active");
         document.querySelector(".hamburger-menu").classList.toggle("active");
+
+        document.getElementById("aboutLink").addEventListener("click", () => {
+          document.getElementById("navMenu").classList.remove("active");
+          document.querySelector(".burger").classList.remove("active");
+          document.querySelector(".hamburger-menu").classList.remove("active");
+        });
     }
   </script>
   </body>
