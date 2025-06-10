@@ -6,7 +6,7 @@
 <body>
 <?php
 
-$sql = "select title,author,name,image_url from books join categories on books.category_id = categories.id ORDER BY RAND() LIMIT 20";
+$sql = "select title,author,name,image_url from books join categories on books.category_id = categories.id ORDER BY RAND()";
 $result = mysqli_query($conn, $sql);
 
 echo "<h3>Explore Books</h3>";
