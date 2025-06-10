@@ -24,12 +24,25 @@
         <?php if (isset($_GET['error'])): ?>
           <div style="color: red; margin-bottom: 10px;">
               <?php
-                  if ($_GET['error'] === "registration_error") {
-                      echo "Registration error. Please try again.";
-                  } 
+                  switch ($_GET['error']) {
+                      case 'password_mismatch':
+                          echo "Passwords do not match.";
+                          break;
+                      case 'weak_password':
+                          echo "Password must be at least 6 characters long and contain both letters and numbers.";
+                          break;
+                      case 'user_exists':
+                          echo "An account with this email already exists.";
+                          break;
+                      case 'registration_error':
+                      default:
+                          echo "Registration error. Please try again.";
+                          break;
+                  }
               ?>
           </div>
         <?php endif; ?>
+
     </form>
 </div>
 
